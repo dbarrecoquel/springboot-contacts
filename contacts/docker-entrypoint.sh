@@ -3,7 +3,7 @@
 set -e
 
 echo "======================================"
-echo "🚀 Note Application Starting"
+echo "🚀 Contact Application Starting"
 echo "======================================"
 
 wait_for_postgres() {
