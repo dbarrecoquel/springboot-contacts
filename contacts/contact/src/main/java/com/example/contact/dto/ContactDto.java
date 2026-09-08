@@ -4,10 +4,10 @@ import java.time.LocalDateTime;
 
 public record ContactDto(
 		Long id,
-		String firstname,
-		String lastname,
-		String phonehome,
-		String phonemobile,
+		String firstName,
+		String lastName,
+		String phoneHome,
+		String phoneMobile,
 		String email,
 		String street,
 		String street2,
@@ -18,10 +18,10 @@ public record ContactDto(
 		LocalDateTime updatedAt) {
 	
 	public static ContactDto from(Long id,
-		String firstname,
-		String lastname,
-		String phonehome,
-		String phonemobile,
+		String firstName,
+		String lastName,
+		String phoneHome,
+		String phoneMobile,
 		String email,
 		String street,
 		String street2,
@@ -31,7 +31,7 @@ public record ContactDto(
 		LocalDateTime createdAt,
 		LocalDateTime updatedAt) {
 		
-		return new ContactDto(id, firstname, lastname, phonehome, phonemobile, email, street, street2, postalCode, city, country, createdAt, updatedAt);
+		return new ContactDto(id, firstName, lastName, phoneHome, phoneMobile, email, street, street2, postalCode, city, country, createdAt, updatedAt);
 	}
 
 }
