@@ -6,7 +6,6 @@ echo "======================================"
 echo "🚀 Note Application Starting"
 echo "======================================"
 
-# Fonction pour vérifier si PostgreSQL est prêt
 wait_for_postgres() {
     echo "⏳ Waiting for PostgreSQL to be ready..."
     max_attempts=30
@@ -26,44 +25,30 @@ wait_for_postgres() {
     exit 1
 }
 
-# Attendre PostgreSQL
 wait_for_postgres
-# Attendre encore un peu
-sleep 10
 
 echo "======================================"
-echo "🌐 Starting FrontRest API on port 8083 (DEBUG MODE)"
+echo "🌐 Starting FrontRest API (Profile: ${SPRING_PROFILES_ACTIVE:-default})"
 echo "======================================"
+
 java -jar frontrest.jar \
     --server.port=8083 \
+    --spring.profiles.active=${SPRING_PROFILES_ACTIVE:-dev} \
     --spring.datasource.url=${SPRING_DATASOURCE_URL} \
     --spring.datasource.username=${SPRING_DATASOURCE_USERNAME} \
-    --spring.datasource.password=${SPRING_DATASOURCE_PASSWORD} \
-    --spring.kafka.bootstrap-servers=${SPRING_KAFKA_BOOTSTRAP_SERVERS} \
-    --debug &
+    --spring.datasource.password=${SPRING_DATASOURCE_PASSWORD} &
 
 FRONTREST_PID=$!
 echo "✅ FrontRest started with PID: $FRONTREST_PID"
 
-
-echo ""
-echo "======================================"
-echo "✅ All services started!"
-echo "======================================"
-
-# Fonction de nettoyage
 cleanup() {
-    echo ""
-    echo "======================================"
-    echo "🛑 Shutting down applications..."
-    echo "======================================"
-    kill $ $FRONTREST_PID 2>/dev/null
-    wait $ $FRONTREST_PID 2>/dev/null
+    echo "🛑 Shutting down application..."
+    kill $FRONTREST_PID 2>/dev/null
+    wait $FRONTREST_PID 2>/dev/null
     echo "✅ Shutdown complete"
     exit 0
 }
 
 trap cleanup SIGTERM SIGINT
 
-# Attendre que les processus se terminent
 wait $FRONTREST_PID
