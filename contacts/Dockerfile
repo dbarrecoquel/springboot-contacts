@@ -42,6 +42,6 @@ COPY --from=build /app/frontrest/target/*.jar frontrest.jar
 COPY docker-entrypoint.sh /app/
 RUN chmod +x /app/docker-entrypoint.sh
 
-EXPOSE 8082
+EXPOSE 8083
 
 ENTRYPOINT ["/app/docker-entrypoint.sh"]

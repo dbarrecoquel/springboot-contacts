@@ -32,10 +32,10 @@ wait_for_postgres
 sleep 10
 
 echo "======================================"
-echo "🌐 Starting FrontRest API on port 8082 (DEBUG MODE)"
+echo "🌐 Starting FrontRest API on port 8083 (DEBUG MODE)"
 echo "======================================"
 java -jar frontrest.jar \
-    --server.port=8082 \
+    --server.port=8083 \
     --spring.datasource.url=${SPRING_DATASOURCE_URL} \
     --spring.datasource.username=${SPRING_DATASOURCE_USERNAME} \
     --spring.datasource.password=${SPRING_DATASOURCE_PASSWORD} \
