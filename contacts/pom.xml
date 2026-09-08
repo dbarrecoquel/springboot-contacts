@@ -16,6 +16,7 @@
   </properties>
   <modules>
   	<module>contact</module>
+  	<module>frontrest</module>
   </modules>
   <dependencyManagement>
     <dependencies>
